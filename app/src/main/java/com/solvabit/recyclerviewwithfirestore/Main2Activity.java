@@ -38,14 +38,70 @@ public class Main2Activity extends AppCompatActivity {
 
         event_reg_cardsArrayList = new ArrayList<>();
         setUpRecyclerView();
-       // setUpFirebase();
+        setUpFirebase();
       //  uploadDataToFirebase();
-     //   loadDataFromFirebase();
+        loadDataFromFirebase();
     }
 
 
+   public void loadDataFromFirebase() {
+       if (event_reg_cardsArrayList.size() > 0) {
+           event_reg_cardsArrayList.clear();
+       }
+
+       db.document("/Army Institute Of Technology/Events/PACE/Event Details")
+               .get()
+               .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                          @Override
+                                          public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                              if (task.isSuccessful()) {
+                                                  DocumentSnapshot document = task.getResult();
+                                                  if (document.exists()) {
+                                                      long size = document.getLong("Names.0");
+                                                      int i = 1;
+                                                      while (size > 0) {
+                                                          String temp = "Names." + i + ".Name";
+                                                          System.out.println(temp + "    ");
+                                                          String temp2 = "Names." + i + ".Fees";
+                                                          System.out.println(temp2 + "    ");
 
 
+                                                          String Name = document.getString(temp);
+                                                          String Fees = document.getString(temp2);
+                                                          System.out.println("//" + Name + "\\" + "    ");
+                                                          System.out.println("//" + Fees + "\\" + "    ");
+
+                                                          Event_reg_card event_reg_card = new Event_reg_card(Name, Fees);
+                                                          event_reg_cardsArrayList.add(event_reg_card);
+                                                          i++;
+                                                          size--;
+                                                      }
+                                                  } else {
+                                                      Log.d("Error", "No such document");
+                                                  }
+                                              } else {
+                                                  Log.d("Error", "get failed with ", task.getException());
+                                              }
+                                              adapter = new EventRegRecyclerViewAdapter(Main2Activity.this, event_reg_cardsArrayList);
+                                              mRecyclerView.setAdapter(adapter);
+                                          }
+
+                                      }
+               )
+               .addOnFailureListener(new OnFailureListener() {
+                   @Override
+                   public void onFailure(@NonNull Exception e) {
+                       Toast.makeText(Main2Activity.this, "Error", Toast.LENGTH_SHORT).show();
+                   }
+               });
+
+   }
+
+
+
+    private void setUpFirebase() {
+        db =FirebaseFirestore.getInstance();
+    }
 
 
     private void setUpRecyclerView() {
