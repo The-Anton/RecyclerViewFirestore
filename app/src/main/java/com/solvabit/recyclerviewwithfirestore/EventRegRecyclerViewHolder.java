@@ -23,7 +23,9 @@ public class EventRegRecyclerViewHolder extends RecyclerView.ViewHolder {
     public EventRegRecyclerViewHolder(View itemView) {
         super(itemView);
 
-
+        sub_event_name_text_view= itemView.findViewById(R.id.sub_event_name_txt);
+        prize_text_view = itemView.findViewById(R.id.prize_txt);
+        checkBox_bt = itemView.findViewById(R.id.radio_bt_);
 
         /*checkBox_bt.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
 
