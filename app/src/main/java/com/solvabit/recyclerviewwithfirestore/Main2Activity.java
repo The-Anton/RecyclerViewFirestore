@@ -36,6 +36,21 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
 
+        event_reg_cardsArrayList = new ArrayList<>();
+        setUpRecyclerView();
+       // setUpFirebase();
+      //  uploadDataToFirebase();
+     //   loadDataFromFirebase();
     }
 
+
+
+
+
+
+    private void setUpRecyclerView() {
+        mRecyclerView =findViewById(R.id.recycler_view);
+                mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
 }
