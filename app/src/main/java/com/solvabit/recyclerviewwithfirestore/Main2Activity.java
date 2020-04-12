@@ -43,6 +43,34 @@ public class Main2Activity extends AppCompatActivity {
         loadDataFromFirebase();
     }
 
+   private void uploadDataToFirebase() {
+
+        Map<String, Object> Names = new HashMap<>();
+        Map<String, Object> Name = new HashMap<>();
+        Map<String, Object> t = new HashMap<>();
+
+        Names.put("Names",Name);
+        Name.put("1",t);
+        Name.put("0",1);
+        t.put("Name","Basketball");
+        t.put("Fees","100");
+
+
+        db.document("/Army Institute Of Technology/Events/PACE/Event Details")
+                    .set(Names)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("Msg", "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("Msg", "Error writing document", e);
+                    }
+                });
+    }
 
    public void loadDataFromFirebase() {
        if (event_reg_cardsArrayList.size() > 0) {
@@ -97,7 +125,28 @@ public class Main2Activity extends AppCompatActivity {
 
    }
 
+        /*db.collection("/Army Institute Of Technology/Events/PACE/Event Scores/Event Names")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (DocumentSnapshot querySnapshot: task.getResult()){
+                            Event_reg_card event_reg_card = new Event_reg_card(querySnapshot.getString("Event Name"),
+                                    querySnapshot.getString("Event Fees"));
+                                    event_reg_cardsArrayList.add(event_reg_card);
 
+                        }
+                        adapter = new EventRegRecyclerViewAdapter(Main2Activity.this,event_reg_cardsArrayList);
+                        mRecyclerView.setAdapter(adapter);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Main2Activity.this, "Error",Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }*/
 
     private void setUpFirebase() {
         db =FirebaseFirestore.getInstance();
