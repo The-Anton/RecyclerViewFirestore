@@ -11,4 +11,15 @@ public class Event_reg_card {
         this.prize= prize;
     }
 
+    public String getSub_event_name() {
+        return sub_event_name;
+    }
+
+    public String getPrize() {
+        return prize;
+    }
+
+
+
+    public  boolean getSelected() { return isSelected; }
 }
