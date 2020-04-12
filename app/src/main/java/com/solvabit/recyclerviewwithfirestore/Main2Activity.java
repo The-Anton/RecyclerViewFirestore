@@ -25,7 +25,10 @@ import java.util.Map;
 import java.util.jar.Attributes;
 
 public class Main2Activity extends AppCompatActivity {
-
+    FirebaseFirestore db;
+    RecyclerView mRecyclerView;
+    ArrayList<Event_reg_card> event_reg_cardsArrayList;
+    EventRegRecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
