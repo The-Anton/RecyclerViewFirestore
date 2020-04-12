@@ -42,11 +42,23 @@ public class EventRegRecyclerViewAdapter extends RecyclerView.Adapter<EventRegRe
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+                eventsArrayList.get(position).setSelected(isChecked);
+                Toast.makeText(buttonView.getContext(), "Now Your Total Amount is: " + sumFunction(position),Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+    private int sumFunction(int p) {
+
+
+            if(eventsArrayList.get(p).getSelected()){
+                sum += Integer.parseInt(eventsArrayList.get(p).getPrize().trim());
+        }else{
+                sum -= Integer.parseInt(eventsArrayList.get(p).getPrize().trim());
+            }
+
+        return sum;
+    }
 
     @Override
     public int getItemCount() {
