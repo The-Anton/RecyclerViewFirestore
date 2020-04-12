@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,11 +31,36 @@ public class Main2Activity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     ArrayList<Event_reg_card> event_reg_cardsArrayList;
     EventRegRecyclerViewAdapter adapter;
+    private FirebaseRemoteConfig mFirebaseRemoteConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+        mFirebaseRemoteConfig.setDefaultsAsync(R.xml.remote_config_defaults);
+        FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
+                .setMinimumFetchIntervalInSeconds(3600)
+                .build();
+        mFirebaseRemoteConfig.setConfigSettingsAsync(configSettings);
+
+        mFirebaseRemoteConfig.fetchAndActivate()
+                .addOnCompleteListener(this, new OnCompleteListener<Boolean>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Boolean> task) {
+                        if (task.isSuccessful()) {
+                            boolean updated = task.getResult();
+                            Log.d("Message", "Config params updated: " + updated);
+                            Toast.makeText(Main2Activity.this, "Fetch and activate succeeded",
+                                    Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            Toast.makeText(Main2Activity.this, "Fetch failed",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
 
 
         event_reg_cardsArrayList = new ArrayList<>();

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+ <entry>
+     <key>colorPrimary</key>
+     <value>#008577</value>
+ </entry>
+
+    <entry>
+        <key>colorAccent</key>
+        <value>#D81B60</value>
+    </entry>
+</defaultsMap>
