@@ -14,20 +14,48 @@ import java.util.ArrayList;
 
 public class EventRegRecyclerViewAdapter extends RecyclerView.Adapter<EventRegRecyclerViewHolder> {
 
+    Main2Activity main2Activity;
+    ArrayList<Event_reg_card> eventsArrayList;
+    int sum=0;
+
+    public EventRegRecyclerViewAdapter(Main2Activity main2Activity, ArrayList<Event_reg_card> eventsArrayList){
+        this.main2Activity= main2Activity;
+        this.eventsArrayList = eventsArrayList;
+    }
 
     @NonNull
     @Override
     public EventRegRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        Context context;
+        LayoutInflater layoutInflater = LayoutInflater.from(main2Activity.getBaseContext());
+        View view = layoutInflater.inflate(R.layout.card_elements, parent,false);
+
+        return new EventRegRecyclerViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EventRegRecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull EventRegRecyclerViewHolder holder, final int position) {
+        holder.sub_event_name_text_view.setText(eventsArrayList.get(position).getSub_event_name());
+        holder.prize_text_view.setText(eventsArrayList.get(position).getPrize());
 
+        holder.checkBox_bt.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {
-        return 0;
+        return eventsArrayList.size();
     }
+
+    public int getSum(){
+        return sum;
+    }
+
+
 }
