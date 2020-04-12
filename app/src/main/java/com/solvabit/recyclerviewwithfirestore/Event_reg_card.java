@@ -19,7 +19,15 @@ public class Event_reg_card {
         return prize;
     }
 
+    public void setSub_event_name(String sub_event_name) {
+        this.sub_event_name = sub_event_name;
+    }
 
+    public void setPrize(String prize) {
+        this.prize = prize;
+    }
+
+    public void setSelected(boolean selected) { isSelected =selected; }
 
     public  boolean getSelected() { return isSelected; }
 }
