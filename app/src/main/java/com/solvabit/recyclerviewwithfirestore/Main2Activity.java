@@ -5,8 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
+import com.google.firebase.remoteconfig.proto.ConfigPersistence;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,21 +43,24 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
-        mFirebaseRemoteConfig.setDefaultsAsync(R.xml.remote_config_defaults);
+
         FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
-                .setMinimumFetchIntervalInSeconds(3600)
+                .setFetchTimeoutInSeconds(3000)
                 .build();
         mFirebaseRemoteConfig.setConfigSettingsAsync(configSettings);
+
+        mFirebaseRemoteConfig.setDefaultsAsync(R.xml.remote_config_defaults);
 
         mFirebaseRemoteConfig.fetchAndActivate()
                 .addOnCompleteListener(this, new OnCompleteListener<Boolean>() {
                     @Override
                     public void onComplete(@NonNull Task<Boolean> task) {
                         if (task.isSuccessful()) {
-                            boolean updated = task.getResult();
-                            Log.d("Message", "Config params updated: " + updated);
+
                             Toast.makeText(Main2Activity.this, "Fetch and activate succeeded",
                                     Toast.LENGTH_SHORT).show();
+                            mFirebaseRemoteConfig.activate();
+                            setupFetch();
 
                         } else {
                             Toast.makeText(Main2Activity.this, "Fetch failed",
@@ -62,7 +70,6 @@ public class Main2Activity extends AppCompatActivity {
                 });
 
 
-
         event_reg_cardsArrayList = new ArrayList<>();
         setUpRecyclerView();
         setUpFirebase();
@@ -70,7 +77,20 @@ public class Main2Activity extends AppCompatActivity {
         loadDataFromFirebase();
     }
 
-   private void uploadDataToFirebase() {
+
+
+
+
+
+    private void setupFetch(){
+     String color = mFirebaseRemoteConfig.getString("colorPrimaryDark");
+        LinearLayout layout = findViewById(R.id.layout);
+        layout.setBackgroundColor(Color.parseColor(color));
+     setTitleColor(Color.parseColor(color));
+
+   }
+
+    private void uploadDataToFirebase() {
 
         Map<String, Object> Names = new HashMap<>();
         Map<String, Object> Name = new HashMap<>();

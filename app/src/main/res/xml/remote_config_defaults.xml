@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <defaultsMap>
  <entry>
-     <key>colorPrimary</key>
-     <value>#008577</value>
+     <key>colorPrimaryDark</key>
+     <value>#00574B</value>
  </entry>
 
     <entry>
