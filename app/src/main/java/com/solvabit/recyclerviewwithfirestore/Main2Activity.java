@@ -86,7 +86,7 @@ public class Main2Activity extends AppCompatActivity {
      String color = mFirebaseRemoteConfig.getString("colorPrimaryDark");
         LinearLayout layout = findViewById(R.id.layout);
         layout.setBackgroundColor(Color.parseColor(color));
-     setTitleColor(Color.parseColor(color));
+     setTitleColor(Color.parseColor(color));   //not working
 
    }
 
