@@ -1,4 +1,4 @@
- package com.solvabit.recyclerviewwithfirestore.simpleExoPlayer;
+ package com.solvabit.recyclerviewwithfirestore;
 
  import android.net.Uri;
  import android.os.Bundle;
@@ -6,6 +6,7 @@
  import android.widget.TextView;
 
  import androidx.appcompat.app.AppCompatActivity;
+
 
  import com.google.android.exoplayer2.ExoPlayerFactory;
  import com.google.android.exoplayer2.SimpleExoPlayer;

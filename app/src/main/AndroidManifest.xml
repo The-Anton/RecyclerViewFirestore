@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".EventRecyclerView_Activity"/>
-        <activity android:name=".simpleExoPlayer.ExoPlayerAcitvity"/>
+        <activity android:name=".ExoPlayerAcitvity"/>
     </application>
 
 </manifest>
