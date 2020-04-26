@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,15 +17,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.jar.Attributes;
 
-public class Main2Activity extends AppCompatActivity {
+public class EventRecyclerView_Activity extends AppCompatActivity {
     FirebaseFirestore db;
     RecyclerView mRecyclerView;
     ArrayList<Event_reg_card> event_reg_cardsArrayList;
@@ -37,29 +33,9 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
-        mFirebaseRemoteConfig.setDefaultsAsync(R.xml.remote_config_defaults);
-        FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
-                .setMinimumFetchIntervalInSeconds(3600)
-                .build();
-        mFirebaseRemoteConfig.setConfigSettingsAsync(configSettings);
 
-        mFirebaseRemoteConfig.fetchAndActivate()
-                .addOnCompleteListener(this, new OnCompleteListener<Boolean>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Boolean> task) {
-                        if (task.isSuccessful()) {
-                            boolean updated = task.getResult();
-                            Log.d("Message", "Config params updated: " + updated);
-                            Toast.makeText(Main2Activity.this, "Fetch and activate succeeded",
-                                    Toast.LENGTH_SHORT).show();
 
-                        } else {
-                            Toast.makeText(Main2Activity.this, "Fetch failed",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+
 
 
 
@@ -137,7 +113,7 @@ public class Main2Activity extends AppCompatActivity {
                                               } else {
                                                   Log.d("Error", "get failed with ", task.getException());
                                               }
-                                              adapter = new EventRegRecyclerViewAdapter(Main2Activity.this, event_reg_cardsArrayList);
+                                              adapter = new EventRegRecyclerViewAdapter(EventRecyclerView_Activity.this, event_reg_cardsArrayList);
                                               mRecyclerView.setAdapter(adapter);
                                           }
 
@@ -146,34 +122,12 @@ public class Main2Activity extends AppCompatActivity {
                .addOnFailureListener(new OnFailureListener() {
                    @Override
                    public void onFailure(@NonNull Exception e) {
-                       Toast.makeText(Main2Activity.this, "Error", Toast.LENGTH_SHORT).show();
+                       Toast.makeText(EventRecyclerView_Activity.this, "Error", Toast.LENGTH_SHORT).show();
                    }
                });
 
    }
 
-        /*db.collection("/Army Institute Of Technology/Events/PACE/Event Scores/Event Names")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        for (DocumentSnapshot querySnapshot: task.getResult()){
-                            Event_reg_card event_reg_card = new Event_reg_card(querySnapshot.getString("Event Name"),
-                                    querySnapshot.getString("Event Fees"));
-                                    event_reg_cardsArrayList.add(event_reg_card);
-
-                        }
-                        adapter = new EventRegRecyclerViewAdapter(Main2Activity.this,event_reg_cardsArrayList);
-                        mRecyclerView.setAdapter(adapter);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Main2Activity.this, "Error",Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }*/
 
     private void setUpFirebase() {
         db =FirebaseFirestore.getInstance();

@@ -14,12 +14,12 @@ import java.util.ArrayList;
 
 public class EventRegRecyclerViewAdapter extends RecyclerView.Adapter<EventRegRecyclerViewHolder> {
 
-    Main2Activity main2Activity;
+    EventRecyclerView_Activity eventRecyclerViewActivity;
     ArrayList<Event_reg_card> eventsArrayList;
     int sum=0;
 
-    public EventRegRecyclerViewAdapter(Main2Activity main2Activity, ArrayList<Event_reg_card> eventsArrayList){
-        this.main2Activity= main2Activity;
+    public EventRegRecyclerViewAdapter(EventRecyclerView_Activity eventRecyclerViewActivity, ArrayList<Event_reg_card> eventsArrayList){
+        this.eventRecyclerViewActivity = eventRecyclerViewActivity;
         this.eventsArrayList = eventsArrayList;
     }
 
@@ -27,8 +27,8 @@ public class EventRegRecyclerViewAdapter extends RecyclerView.Adapter<EventRegRe
     @Override
     public EventRegRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context;
-        LayoutInflater layoutInflater = LayoutInflater.from(main2Activity.getBaseContext());
-        View view = layoutInflater.inflate(R.layout.card_elements, parent,false);
+        LayoutInflater layoutInflater = LayoutInflater.from(eventRecyclerViewActivity.getBaseContext());
+        View view = layoutInflater.inflate(R.layout.card_elements_events, parent,false);
 
         return new EventRegRecyclerViewHolder(view);
     }
