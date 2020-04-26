@@ -135,7 +135,7 @@
          exoPlayer.setPlayWhenReady(playWhenReady);
          exoPlayer.seekTo(currentWindow, playbackPosition);
          exoPlayer.prepare(mediaSource, false, false);
-         exoPlayer.setPlayWhenReady(true);
+         exoPlayer.setPlayWhenReady(false);
      }
 
 
