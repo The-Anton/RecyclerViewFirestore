@@ -12,7 +12,7 @@
         card_view:cardElevation="16dp"
         card_view:cardPreventCornerOverlap="false"
         android:layout_width="375dp"
-        android:layout_height="310dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="406dp"
         android:background="@drawable/shadow"
         android:dividerHeight="0.0px"
@@ -24,39 +24,44 @@
         tools:ignore="MissingConstraints">
 
         <LinearLayout
-            android:layout_width="375dp"
-            android:layout_height="310dp"
-            android:background="@drawable/card_round"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:elevation="20dp"
             android:orientation="vertical"
             android:outlineAmbientShadowColor="@color/cardview_dark_background"
-            android:padding="10dp">
+            >
 
             <LinearLayout
+                android:gravity="top"
                 android:layout_width="match_parent"
-                android:layout_height="250dp">
+                android:layout_height="match_parent">
 
                 <com.google.android.exoplayer2.ui.SimpleExoPlayerView
                     android:id="@+id/exo_player_view"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
+                    app:use_controller="false"
+                    app:show_timeout="5000"
+                    app:rewind_increment="30000"
+                    app:fastforward_increment="30000"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.419"
-                    tools:ignore="MissingConstraints"></com.google.android.exoplayer2.ui.SimpleExoPlayerView>
+                    tools:ignore="MissingConstraints" />
 
             </LinearLayout>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp">
+                android:layout_height="45dp"
+                android:background="@drawable/card_round">
 
                 <LinearLayout
-                    android:layout_width="182dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <TextView
