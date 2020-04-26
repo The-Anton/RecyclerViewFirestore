@@ -1,16 +1,12 @@
 package com.solvabit.recyclerviewwithfirestore.videoplayerRecyclerView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.Context;
 
-import android.os.Bundle;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.solvabit.recyclerviewwithfirestore.R;
-
-public class VideoPlayerRecyclerView extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_video_player_recycler_view);
+public class VideoPlayerRecyclerView extends RecyclerView {
+    public VideoPlayerRecyclerView(@NonNull Context context) {
+        super(context);
     }
 }
