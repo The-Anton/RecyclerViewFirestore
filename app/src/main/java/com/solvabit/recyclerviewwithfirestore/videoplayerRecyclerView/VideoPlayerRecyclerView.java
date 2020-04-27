@@ -82,6 +82,31 @@ public class VideoPlayerRecyclerView extends RecyclerView {
         }
 
 
+        private void init(Context context){
+            this.context = context.getApplicationContext();
+            Display display = ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+            Point point = new Point();
+            display.getSize(point);
+            videoSurfaceDefaultHeight = point.x;
+            screenDefaultHeight = point.y;
+
+            videoPlayerView = new PlayerView(this.context);
+            videoPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_ZOOM);
+
+            BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
+            TrackSelection.Factory videoTrackSelectionFactory = new AdaptiveTrackSelection.Factory(bandwidthMeter);
+            TrackSelector trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
+
+            // 2. Create the player
+            videoPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector);
+            // Bind the player to the view.
+            videoPlayerView.setUseController(false);
+            videoPlayerView.setPlayer(videoPlayer);
+            setVolumeControl(VolumeState.ON);
+
+
+        }
+
 
     }
 
