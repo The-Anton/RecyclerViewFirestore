@@ -104,7 +104,127 @@ public class VideoPlayerRecyclerView extends RecyclerView {
             videoPlayerView.setPlayer(videoPlayer);
             setVolumeControl(VolumeState.ON);
 
+            addOnScrollListener(new OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
 
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        Log.d(TAG, "onScrollStateChanged: called.");
+                        if(thumbnail != null){ // show the old thumbnail
+                            thumbnail.setVisibility(VISIBLE);
+                        }
+
+                        // There's a special case when the end of the list has been reached.
+                        // Need to handle that with this bit of logic
+                        if(!recyclerView.canScrollVertically(1)){
+                            playVideo(true);
+                        }
+                        else{
+                            playVideo(false);
+                        }
+                    }
+                }
+
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                }
+            });
+
+            addOnChildAttachStateChangeListener(new OnChildAttachStateChangeListener() {
+                @Override
+                public void onChildViewAttachedToWindow(View view) {
+
+                }
+
+                @Override
+                public void onChildViewDetachedFromWindow(View view) {
+                    if (viewHolderParent != null && viewHolderParent.equals(view)) {
+                        resetVideoView();
+                    }
+
+                }
+            });
+
+            videoPlayer.addListener(new Player.EventListener() {
+                @Override
+                public void onTimelineChanged(Timeline timeline, @Nullable Object manifest, int reason) {
+
+                }
+
+                @Override
+                public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
+
+                }
+
+                @Override
+                public void onLoadingChanged(boolean isLoading) {
+
+                }
+
+                @Override
+                public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+                    switch (playbackState) {
+
+                        case Player.STATE_BUFFERING:
+                            Log.e(TAG, "onPlayerStateChanged: Buffering video.");
+                            if (progressBar != null) {
+                                progressBar.setVisibility(VISIBLE);
+                            }
+
+                            break;
+                        case Player.STATE_ENDED:
+                            Log.d(TAG, "onPlayerStateChanged: Video ended.");
+                            videoPlayer.seekTo(0);
+                            break;
+                        case Player.STATE_IDLE:
+
+                            break;
+                        case Player.STATE_READY:
+                            Log.e(TAG, "onPlayerStateChanged: Ready to play.");
+                            if (progressBar != null) {
+                                progressBar.setVisibility(GONE);
+                            }
+                            if(!isVideoViewAdded){
+                                addVideoView();
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                @Override
+                public void onRepeatModeChanged(int repeatMode) {
+
+                }
+
+                @Override
+                public void onShuffleModeEnabledChanged(boolean shuffleModeEnabled) {
+
+                }
+
+                @Override
+                public void onPlayerError(ExoPlaybackException error) {
+
+                }
+
+                @Override
+                public void onPositionDiscontinuity(int reason) {
+
+                }
+
+                @Override
+                public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
+
+                }
+
+                @Override
+                public void onSeekProcessed() {
+
+                }
+            });
         }
 
 
