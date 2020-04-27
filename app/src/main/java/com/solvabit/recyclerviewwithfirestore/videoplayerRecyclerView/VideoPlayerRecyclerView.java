@@ -320,12 +320,7 @@ public class VideoPlayerRecyclerView extends RecyclerView {
         }
     };
 
-    /**
-     * Returns the visible region of the video surface on the screen.
-     * if some is cut off, it will return less than the @videoSurfaceDefaultHeight
-     * @param playPosition
-     * @return
-     */
+
     private int getVisibleVideoSurfaceHeight(int playPosition) {
         int at = playPosition - ((LinearLayoutManager) getLayoutManager()).findFirstVisibleItemPosition();
         Log.d(TAG, "getVisibleVideoSurfaceHeight: at: " + at);
