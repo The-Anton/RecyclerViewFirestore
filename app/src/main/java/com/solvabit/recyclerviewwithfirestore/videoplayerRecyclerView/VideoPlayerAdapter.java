@@ -16,31 +16,32 @@ import com.solvabit.recyclerviewwithfirestore.R;
 
 import java.util.ArrayList;
 
-public class VideoPlayerAdapter extends RecyclerView.ViewHolder {
-    FrameLayout media_container;
-    TextView title;
-    ImageView thumbnail, volumeControl;
-    ProgressBar progressBar;
-    View parent;
-    RequestManager requestManager;
+public class VideoPlayerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
+    private ArrayList<videoPlayerData> videoPlayerDataArrayList;
+    private RequestManager requestManager;
 
-    public VideoPlayerAdapter(@NonNull View itemView) {
-        super(itemView);
-        parent = itemView;
-        media_container = itemView.findViewById(R.id.media_container);
-        thumbnail = itemView.findViewById(R.id.thumbnail);
-        title = itemView.findViewById(R.id.title);
-        progressBar = itemView.findViewById(R.id.progressBar);
-        volumeControl = itemView.findViewById(R.id.volume_control);
-    }
 
-    public void onBind(videoPlayerData videoPlayerData, RequestManager requestManager) {
+    public VideoPlayerAdapter(ArrayList<videoPlayerData> videoPlayerDataArrayList, RequestManager requestManager) {
+        this.videoPlayerDataArrayList = videoPlayerDataArrayList;
         this.requestManager = requestManager;
-        parent.setTag(this);
-        title.setText(videoPlayerData.getTitle());
-        this.requestManager
-                .load(videoPlayerData.getThumbnail())
-                .into(thumbnail);
     }
+
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new VideoPlayerHolder(
+                LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.video_list_items, viewGroup, false));
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+        ((VideoPlayerHolder)viewHolder).onBind(videoPlayerDataArrayList.get(i), requestManager);
+    }
+
+    @Override
+    public int getItemCount() {
+        return videoPlayerDataArrayList.size();
+    }
+
 
 }
