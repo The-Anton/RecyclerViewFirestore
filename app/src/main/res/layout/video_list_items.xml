@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:weightSum="100"
     android:id="@+id/parent"
-    android:background="#fff">
+    android:background="#00BCD4">
 
     <TextView
         android:id="@+id/title"
@@ -17,7 +17,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="15dp"
         android:padding="10dp"
-        android:textColor="#000"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
