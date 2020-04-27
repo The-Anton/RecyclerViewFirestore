@@ -35,11 +35,11 @@ public class VideoPlayerRecyclerViewActivity extends AppCompatActivity {
     private void initRecyclerView(){
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
-       // VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(10);
-       // mRecyclerView.addItemDecoration(itemDecorator);
+       VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(10);
+        mRecyclerView.addItemDecoration(itemDecorator);
 
-        ArrayList<videoPlayerData> videoPlayerDataArrayList = new ArrayList<videoPlayerData>(Arrays.asList(Resources.MEDIA_OBJECTS));
-        mRecyclerView.setMediaObjects(videoPlayerDataArrayList);
+        ArrayList<videoPlayerData> videoPlayerDataArrayList = new ArrayList<videoPlayerData>(Arrays.asList(Resources.V));
+       mRecyclerView.setMediaObjects(videoPlayerDataArrayList);
         VideoPlayerAdapter adapter = new VideoPlayerAdapter(videoPlayerDataArrayList, initGlide());
         mRecyclerView.setAdapter(adapter);
     }
