@@ -390,7 +390,56 @@ public class VideoPlayerRecyclerView extends RecyclerView {
         viewHolderParent = null;
     }
 
+    private void toggleVolume() {
+        if (videoPlayer != null) {
+            if (volumeState == VolumeState.OFF) {
+                Log.d(TAG, "togglePlaybackState: enabling volume.");
+                setVolumeControl(VolumeState.ON);
 
+            } else if(volumeState == VolumeState.ON) {
+                Log.d(TAG, "togglePlaybackState: disabling volume.");
+                setVolumeControl(VolumeState.OFF);
+
+            }
+        }
+    }
+
+    private void setVolumeControl(VolumeState state){
+        volumeState = state;
+        if(state == VolumeState.OFF){
+            videoPlayer.setVolume(0f);
+            animateVolumeControl();
+        }
+        else if(state == VolumeState.ON){
+            videoPlayer.setVolume(1f);
+            animateVolumeControl();
+        }
+    }
+
+    private void animateVolumeControl(){
+        if(volumeControl != null){
+            volumeControl.bringToFront();
+            if(volumeState == VolumeState.OFF){
+                requestManager.load(R.drawable.ic_volume_off_grey_24dp)
+                        .into(volumeControl);
+            }
+            else if(volumeState == VolumeState.ON){
+                requestManager.load(R.drawable.ic_volume_up_grey_24dp)
+                        .into(volumeControl);
+            }
+            volumeControl.animate().cancel();
+
+            volumeControl.setAlpha(1f);
+
+            volumeControl.animate()
+                    .alpha(0f)
+                    .setDuration(600).setStartDelay(1000);
+        }
+    }
+
+    public void setMediaObjects(ArrayList<videoPlayerData> videoPlayerData){
+        this.videoPlayerData = videoPlayerData;
+    }
 
 
     }
