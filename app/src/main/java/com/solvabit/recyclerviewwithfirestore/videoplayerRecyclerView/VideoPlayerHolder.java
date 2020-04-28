@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.RequestManager;
 import com.solvabit.recyclerviewwithfirestore.R;
+import com.solvabit.recyclerviewwithfirestore.videoplayerRecyclerView.Models.videoPlayerData;
 
 public class VideoPlayerHolder  extends RecyclerView.ViewHolder {
 

@@ -29,4 +29,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sampleVideoBtn" />
+
+    <Button
+        android:id="@+id/recyclerViewforVideosBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="103dp"
+        android:text="RecyclerViews Of Videos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventRecyclerBtn" />
 </androidx.constraintlayout.widget.ConstraintLayout>

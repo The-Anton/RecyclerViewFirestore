@@ -3,13 +3,15 @@ package com.solvabit.recyclerviewwithfirestore.videoplayerRecyclerView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 import com.solvabit.recyclerviewwithfirestore.R;
+import com.solvabit.recyclerviewwithfirestore.videoplayerRecyclerView.Models.videoPlayerData;
+import com.solvabit.recyclerviewwithfirestore.videoplayerRecyclerView.Util.Resources;
+import com.solvabit.recyclerviewwithfirestore.videoplayerRecyclerView.Util.VerticalSpacingItemDecorator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +40,7 @@ public class VideoPlayerRecyclerViewActivity extends AppCompatActivity {
        VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(10);
         mRecyclerView.addItemDecoration(itemDecorator);
 
-        ArrayList<videoPlayerData> videoPlayerDataArrayList = new ArrayList<videoPlayerData>(Arrays.asList(Resources.V));
+        ArrayList<videoPlayerData> videoPlayerDataArrayList = new ArrayList<videoPlayerData>(Arrays.asList(Resources.PLAYER_DATA));
        mRecyclerView.setMediaObjects(videoPlayerDataArrayList);
         VideoPlayerAdapter adapter = new VideoPlayerAdapter(videoPlayerDataArrayList, initGlide());
         mRecyclerView.setAdapter(adapter);

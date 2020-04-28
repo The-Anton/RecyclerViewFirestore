@@ -1,4 +1,4 @@
-package com.solvabit.recyclerviewwithfirestore.videoplayerRecyclerView;
+package com.solvabit.recyclerviewwithfirestore.videoplayerRecyclerView.Models;
 
 public class videoPlayerData {
     private String title;

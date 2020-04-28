@@ -1,5 +1,6 @@
-package com.solvabit.recyclerviewwithfirestore.videoplayerRecyclerView;
+package com.solvabit.recyclerviewwithfirestore.videoplayerRecyclerView.Util;
 
+import com.solvabit.recyclerviewwithfirestore.videoplayerRecyclerView.Models.videoPlayerData;
 
 public class Resources {
 

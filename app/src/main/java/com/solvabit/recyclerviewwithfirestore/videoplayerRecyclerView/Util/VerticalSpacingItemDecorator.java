@@ -1,4 +1,4 @@
-package com.solvabit.recyclerviewwithfirestore.videoplayerRecyclerView;
+package com.solvabit.recyclerviewwithfirestore.videoplayerRecyclerView.Util;
 
 import android.graphics.Rect;
 import android.view.View;

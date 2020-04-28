@@ -41,8 +41,11 @@ import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.solvabit.recyclerviewwithfirestore.R;
+import com.solvabit.recyclerviewwithfirestore.videoplayerRecyclerView.Models.videoPlayerData;
 
 import java.util.ArrayList;
+
+import static com.google.android.exoplayer2.trackselection.TrackSelection.*;
 
 public class VideoPlayerRecyclerView extends RecyclerView {
 
@@ -60,7 +63,7 @@ public class VideoPlayerRecyclerView extends RecyclerView {
         private SimpleExoPlayer videoPlayer;
 
         // vars
-        private ArrayList<videoPlayerData> videoPlayerData = new ArrayList<>();
+        private ArrayList<videoPlayerData> videoPlayerDataArrayList = new ArrayList<>();
         private int videoSurfaceDefaultHeight = 0;
         private int screenDefaultHeight = 0;
         private Context context;
@@ -94,8 +97,10 @@ public class VideoPlayerRecyclerView extends RecyclerView {
             videoPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_ZOOM);
 
             BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
-            TrackSelection.Factory videoTrackSelectionFactory = new AdaptiveTrackSelection.Factory(bandwidthMeter);
-            TrackSelector trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
+            Factory videoTrackSelectionFactory =
+                    new AdaptiveTrackSelection.Factory(bandwidthMeter);
+            TrackSelector trackSelector =
+                    new DefaultTrackSelector(videoTrackSelectionFactory);
 
             // 2. Create the player
             videoPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector);
@@ -259,7 +264,7 @@ public class VideoPlayerRecyclerView extends RecyclerView {
             }
         }
         else{
-            targetPosition = videoPlayerData.size() - 1;
+            targetPosition = videoPlayerDataArrayList.size() - 1;
         }
 
         Log.d(TAG, "playVideo: target position: " + targetPosition);
@@ -286,7 +291,7 @@ public class VideoPlayerRecyclerView extends RecyclerView {
             return;
         }
 
-        VideoPlayerAdapter holder = (VideoPlayerAdapter) child.getTag();
+        VideoPlayerHolder holder = (VideoPlayerHolder) child.getTag();
         if (holder == null) {
             playPosition = -1;
             return;
@@ -304,7 +309,7 @@ public class VideoPlayerRecyclerView extends RecyclerView {
 
         DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(
                 context, Util.getUserAgent(context, "RecyclerView VideoPlayer"));
-        String mediaUrl = videoPlayerData.get(targetPosition).getMedia_url();
+        String mediaUrl = videoPlayerDataArrayList.get(targetPosition).getMedia_url();
         if (mediaUrl != null) {
             MediaSource videoSource = new ExtractorMediaSource.Factory(dataSourceFactory)
                     .createMediaSource(Uri.parse(mediaUrl));
@@ -437,8 +442,8 @@ public class VideoPlayerRecyclerView extends RecyclerView {
         }
     }
 
-    public void setMediaObjects(ArrayList<videoPlayerData> videoPlayerData){
-        this.videoPlayerData = videoPlayerData;
+    public void setMediaObjects(ArrayList<videoPlayerData> videoPlayerDataArrayList){
+        this.videoPlayerDataArrayList = videoPlayerDataArrayList;
     }
 
 

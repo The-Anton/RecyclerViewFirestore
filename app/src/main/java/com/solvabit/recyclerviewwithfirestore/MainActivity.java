@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.solvabit.recyclerviewwithfirestore.videoplayerRecyclerView.VideoPlayerRecyclerViewActivity;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -17,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
        Button videoPlayerBtn= findViewById(R.id.sampleVideoBtn);
         Button eventRecyclerBtn= findViewById(R.id.eventRecyclerBtn);
+        Button videoRecyclerViewBtn= findViewById(R.id.recyclerViewforVideosBtn);
 
         videoPlayerBtn.setOnClickListener(
                 new View.OnClickListener() {
@@ -35,7 +38,13 @@ public class MainActivity extends AppCompatActivity {
 
                 });
 
+        videoRecyclerViewBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    public void onClick(View v) {
+                        startActivity(new Intent(MainActivity.this, VideoPlayerRecyclerViewActivity.class));
+                    }
 
+                });
 
 
 
