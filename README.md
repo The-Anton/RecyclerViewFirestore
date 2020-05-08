@@ -9,7 +9,7 @@ Features:
 
 Key points:
 
-1. This repository shows a new methord of implementing Custom RecyclerView for working smmothly with firestore database.
+1. This repository shows a new methord of implementing Custom RecyclerView for working smoothly with firestore database.
 2. This repository also implements the same kind of streaming technique used by YouTube.
 3. All the streaming happens in the RecyclerView
 4. Multiple videos can be stream though the RecyclerView
